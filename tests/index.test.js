@@ -1,10 +1,11 @@
-import { hello, MSG } from '../src'
+import { connectToDatabase, example } from '../src'
 
-it('return Hello', () => {
-  // Given
-  const expected = MSG
-  // When
-  const result = hello()
-  // Then
-  expect(result).toBe(expected)
-})
+test('sanity check', () => {
+  const result = example();
+  expect(result).toBe("hi");
+});
+
+test('test database', async () => {
+  const [result] = await connectToDatabase();
+  expect({ ...result }).toStrictEqual({ "1" : 1 });
+});
